@@ -2,7 +2,6 @@ package auction
 
 import (
 	"context"
-	"time"
 
 	"github.com/pimentafm/auction-go/configuration/logger"
 	"github.com/pimentafm/auction-go/internal/entity/auction_entity"
@@ -17,7 +16,7 @@ type Auction struct {
 	Description string                          `bson:"description"`
 	Condition   auction_entity.ProductCondition `bson:"condition"`
 	Status      auction_entity.AuctionStatus    `bson:"status"`
-	Timestamp   time.Time                       `bson:"timestamp"`
+	Timestamp   int64                           `bson:"timestamp"`
 }
 
 type AuctionRepository struct {
@@ -38,7 +37,7 @@ func (ar *AuctionRepository) CreateAuction(ctx context.Context, auctionEntity au
 		Description: auctionEntity.Description,
 		Condition:   auctionEntity.Condition,
 		Status:      auctionEntity.Status,
-		Timestamp:   auctionEntity.Timestamp,
+		Timestamp:   auctionEntity.Timestamp.Unix(),
 	}
 
 	_, err := ar.Collection.InsertOne(ctx, auctionEntityMongo)
