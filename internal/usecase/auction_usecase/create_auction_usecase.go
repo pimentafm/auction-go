@@ -5,7 +5,9 @@ import (
 	"time"
 
 	"github.com/pimentafm/auction-go/internal/entity/auction_entity"
+	"github.com/pimentafm/auction-go/internal/entity/bid_entity"
 	"github.com/pimentafm/auction-go/internal/internal_error"
+	"github.com/pimentafm/auction-go/internal/usecase/bid_usecase"
 )
 
 type AuctionInputDTO struct {
@@ -25,11 +27,17 @@ type AuctionOutputDTO struct {
 	Timestamp   time.Time        `json:"timestamp" time_format:"2006-01-02 15:04:05"`
 }
 
+type WinningInfoOutputDTO struct {
+	Auction AuctionOutputDTO          `json:"auction"`
+	Bid     *bid_usecase.BidOutputDTO `json:"bid,omitempty"`
+}
+
 type ProductCondition int64
 type AuctionStatus int64
 
 type AuctionUseCase struct {
 	auctionRepositoryInterface auction_entity.AuctionRepositoryInterface
+	bidRepositoryInterface     bid_entity.BidRepository
 }
 
 func (au *AuctionUseCase) CreateAuction(ctx context.Context, auctionInput AuctionInputDTO) *internal_error.InternalError {
