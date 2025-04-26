@@ -52,7 +52,7 @@ func (au *AuctionUseCase) FindAuctions(
 	return auctionOutputs, nil
 }
 
-func (au *AuctionUseCase) FindWinningBidAuctionById(
+func (au *AuctionUseCase) FindWinningBidByAuctionId(
 	ctx context.Context,
 	auctionId string) (*WinningInfoOutputDTO, *internal_error.InternalError) {
 
