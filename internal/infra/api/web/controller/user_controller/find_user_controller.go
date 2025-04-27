@@ -1,4 +1,4 @@
-package user_controler
+package user_controller
 
 import (
 	"context"
@@ -11,10 +11,10 @@ import (
 )
 
 type UserController struct {
-	userUseCase user_usecase.UserUseCase
+	userUseCase user_usecase.UserUserCaseInterface
 }
 
-func NewUserController(userUseCase user_usecase.UserUseCase) *UserController {
+func NewUserController(userUseCase user_usecase.UserUserCaseInterface) *UserController {
 	return &UserController{
 		userUseCase: userUseCase,
 	}

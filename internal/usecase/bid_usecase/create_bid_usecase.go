@@ -38,7 +38,7 @@ func NewBidUseCase(bidRepository bid_entity.BidRepository) BidUseCaseInterface {
 	maxSizeInterval := getMaxBatchSizeInterval()
 	maxBatchSize := getMaxBatchSize()
 
-	bidUsecase := &BidUseCase{
+	bidUseCase := &BidUseCase{
 		BidRepository:       bidRepository,
 		timer:               time.NewTimer(maxSizeInterval),
 		maxBatchSize:        maxBatchSize,
@@ -46,9 +46,9 @@ func NewBidUseCase(bidRepository bid_entity.BidRepository) BidUseCaseInterface {
 		bidChannel:          make(chan bid_entity.Bid, maxBatchSize),
 	}
 
-	bidUsecase.triggerCreateRoutine(context.Background())
+	bidUseCase.triggerCreateRoutine(context.Background())
 
-	return bidUsecase
+	return bidUseCase
 }
 
 var bidBatch []bid_entity.Bid

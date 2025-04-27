@@ -7,6 +7,12 @@ import (
 	"github.com/pimentafm/auction-go/internal/internal_error"
 )
 
+func NewUserUseCase(userRepository user_entity.UserRepositoryInterface) UserUserCaseInterface {
+	return &UserUseCase{
+		UserRepository: userRepository,
+	}
+}
+
 type UserUseCase struct {
 	UserRepository user_entity.UserRepositoryInterface
 }
